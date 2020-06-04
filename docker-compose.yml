@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  addboxs_api:
+    container_name: addboxs_api
+    build: .
+    command: pm2-dev ./app/server.js
+    environment:
+      NODE_ENV: development
+    ports:
+      - '5002:5002'
+    volumes:
+      - .:/home/nodejs/app
+      - /home/nodejs/app/node_modules
+    networks:
+      network-inewgent:
+
+networks:
+  network-inewgent:
+    external: true
+      
