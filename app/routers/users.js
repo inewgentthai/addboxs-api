@@ -17,9 +17,9 @@ router
 
 /* Single User by Name Route */
 router
-  .route('/:username')
+  .route('/:id')
     .get(readUser)
-    .patch(updateUser)
+    .put(updateUser)
     .delete(deleteUser);
 
 module.exports = router;

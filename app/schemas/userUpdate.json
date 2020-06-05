@@ -3,25 +3,30 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "username": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
     "name": {
       "type": "string"
     },
-    "number": {
-      "type": "integer",
-      "minimum": 0
+    "lastname": {
+      "type": "string"
     },
-    "stuff": {
-      "type": "array",
-      "uniqueItems": true,
-      "minItems": 1,
-      "items": {
-        "type": "string"
-      }
-    },
-    "url": {
+    "email": {
       "type": "string",
-      "format": "uri"
+      "format": "email"
+    },
+    "confirmed": {
+      "type": "boolean"
+    },
+    "blocked": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "boolean"
     }
-  },
-  "required": ["username"]
+  }
 }

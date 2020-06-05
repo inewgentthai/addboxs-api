@@ -34,9 +34,9 @@ async function createUser(request, response, next) {
  * @param {String} username - the username of the User to retrieve
  */
 async function readUser(request, response, next) {
-  const { username } = request.params;
+  const { id } = request.params;
   try {
-    const user = await User.readUser(username);
+    const user = await User.readUser(id);
     return response.json(user);
   } catch (err) {
     return next(err);
@@ -48,7 +48,7 @@ async function readUser(request, response, next) {
  * @param {String} username - the username of the User to update
  */
 async function updateUser(request, response, next) {
-  const { username } = request.params;
+  const { id } = request.params;
 
   const validation = validate(request.body, userUpdateSchema);
   if (!validation.valid) {
@@ -62,7 +62,7 @@ async function updateUser(request, response, next) {
   }
 
   try {
-    const user = await User.updateUser(name, request.body);
+    const user = await User.updateUser(id, request.body);
     return response.json(user);
   } catch (err) {
     return next(err);
@@ -74,9 +74,9 @@ async function updateUser(request, response, next) {
  * @param {String} username - the username of the User to remove
  */
 async function deleteUser(request, response, next) {
-  const { username } = request.params;
+  const { id } = request.params;
   try {
-    const deleteMsg = await User.deleteUser(username);
+    const deleteMsg = await User.deleteUser(id);
     return response.json(deleteMsg);
   } catch (err) {
     return next(err);

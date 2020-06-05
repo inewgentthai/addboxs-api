@@ -47,10 +47,10 @@ userSchema.statics = {
    * @param {String} username - the Thing's username
    * @returns {Promise<User, APIError>}
    */
-  async deleteUser(username) {
-    const deleted = await this.findOneAndRemove({ username });
+  async deleteUser(id) {
+    const deleted = await this.findOneAndRemove({ _id: ObjectId(id) });
     if (!deleted) {
-      throw new APIError(404, 'User Not Found', `No user '${username}' found.`);
+      throw new APIError(404, 'User Not Found', `No user id '${id}' found.`);
     }
     return deleted.toObject();
   },
@@ -59,11 +59,11 @@ userSchema.statics = {
    * @param {String} username - the Thing's username
    * @returns {Promise<User, APIError>}
    */
-  async readUser(_id) {
-    // const user = await this.findOne({ username });
-    const user = await this.findOne({ _id: ObjectId(_id) });
+  async readUser(id) {
+    // const user = await this.findOne({ id });
+    const user = await this.findOne({ _id: ObjectId(id) });
     if (!user) {
-      throw new APIError(404, 'User Not Found', `No user id '${_id}' found.`);
+      throw new APIError(404, 'User Not Found', `No user id '${id}' found.`);
     }
     return user.toObject();
   },
@@ -92,12 +92,12 @@ userSchema.statics = {
    * @param {Object} userUpdate - the json containing the User attributes
    * @returns {Promise<User, APIError>}
    */
-  async updateUser(username, userUpdate) {
-    const user = await this.findOneAndUpdate({ username }, userUpdate, {
+  async updateUser(id, userUpdate) {
+    const user = await this.findOneAndUpdate({ _id: ObjectId(id) }, userUpdate, {
       new: true
     });
     if (!user) {
-      throw new APIError(404, 'User Not Found', `No user '${username}' found.`);
+      throw new APIError(404, 'User Not Found', `No user id '${id}' found.`);
     }
     return user.toObject();
   }
